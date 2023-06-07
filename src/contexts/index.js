@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeContextProvider from "./ThemeContext";
+import { ThemeContextProvider } from "./ThemeContext";
 import { GameContextProvider } from "./GameContext";
 
 function Provider({ children }) {

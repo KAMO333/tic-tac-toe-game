@@ -7,7 +7,30 @@ export const CellStyle = styled.button`
   border: none;
   width: 10rem;
   height: 10rem;
-  border-radius: 10px;
+  border-radius: 2.5rem;
   box-shadow: 5px 10px ${(props) => props.theme.colors.cream};
   cursor: pointer;
+  padding: 3rem;
+
+  .markedItem {
+    path {
+      fill: ${(props) => props.theme.colors.primary};
+    }
+  }
+
+  .outLineIcon {
+    path {
+      stroke: ${(props) => props.theme.colors.primary};
+      stroke-width: 0;
+    }
+  }
+
+  &&:hover {
+    .outLineIcon {
+      path {
+        stroke: ${(props) => props.theme.colors.primary};
+        stroke-width: 2;
+      }
+    }
+  }
 `;
