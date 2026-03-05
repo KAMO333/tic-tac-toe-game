@@ -19,7 +19,6 @@ function GameCell({ cellItem, index, isWinningCell }) {
     clickSfx();
     updateBoard(index);
     const result = checkForWinner(game.board);
-    console.log(result);
     if (result) {
       roundComplete(result);
       if (result !== "draw") {
@@ -45,7 +44,11 @@ function GameCell({ cellItem, index, isWinningCell }) {
     );
   }
   return (
-    <CellStyle onClick={cellClickHandler} onMouseEnter={() => hoverSfx()}>
+    <CellStyle
+      onClick={cellClickHandler}
+      onMouseEnter={() => hoverSfx()}
+      data-testid={`cell-${index}`} // Add this line
+    >
       {game.turn === "x" ? (
         <XIconOutline className="outlineIcon" />
       ) : (
