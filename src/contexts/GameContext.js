@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import { genConfig } from "react-nice-avatar";
+import { checkForWinner } from "../utils/GameUtils/Index";
+import RoundOverModal from "../components/Modal/RoundOverModal/RoundOverModal";
 
 export const GameContext = createContext({});
 
@@ -24,18 +26,30 @@ export const GameContextProvider = (props) => {
     roundWinner: "",
     winningCombo: [],
   });
-  const updateBoard = (index) => {
+
+  const updateBoard = (index, handleModal, winSfx) => {
+    // Guard clause: if cell is taken or game is already won
+    if (game.board[index] !== null || game.roundWinner) return;
+
     const updatedBoard = [...game.board];
-
-    if (updatedBoard[index] !== null) return;
-
     updatedBoard[index] = game.turn;
 
-    setGame({
-      ...game,
-      board: updatedBoard,
-      turn: game.turn === "x" ? "o" : "x",
-    });
+    const result = checkForWinner(updatedBoard);
+
+    if (result) {
+      setGame((prev) => ({
+        ...prev,
+        board: updatedBoard,
+      }));
+      // Pass the handlers to roundComplete
+      roundComplete(result, handleModal, winSfx);
+    } else {
+      setGame((prev) => ({
+        ...prev,
+        board: updatedBoard,
+        turn: prev.turn === "x" ? "o" : "x",
+      }));
+    }
   };
 
   const resetBoard = () => {
@@ -89,20 +103,11 @@ export const GameContextProvider = (props) => {
   };
 
   const updateScore = (winner, result) => {
-    // winner is always going to be:
-    // player1, player2, draw
-
     if (winner === "draw") {
       setGame((prevGame) => ({
         ...prevGame,
-        player1: {
-          ...prevGame.player1,
-          score: prevGame.player1.score + 0.5,
-        },
-        player2: {
-          ...prevGame.player2,
-          score: prevGame.player2.score + 0.5,
-        },
+        player1: { ...prevGame.player1, score: prevGame.player1.score + 0.5 },
+        player2: { ...prevGame.player2, score: prevGame.player2.score + 0.5 },
         roundWinner: "",
         winningCombo: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       }));
@@ -118,15 +123,23 @@ export const GameContextProvider = (props) => {
       }));
     }
   };
-  const roundComplete = (result) => {
+
+  const roundComplete = (result, handleModal, winSfx) => {
     if (game.turn === game.player1.choice && result !== "draw") {
       updateScore("player1", result);
+      winSfx();
     } else if (game.turn === game.player2.choice && result !== "draw") {
       updateScore("player2", result);
+      winSfx();
     } else {
-      console.log("DRAW");
       updateScore("draw", result);
     }
+
+    // Modal pops up after a short delay so user sees the win
+    setTimeout(() => {
+      handleModal(<RoundOverModal />);
+    }, 2000);
+
     switchTurn();
   };
 

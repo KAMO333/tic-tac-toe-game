@@ -60,7 +60,11 @@ describe("GameCell Component", () => {
     renderGameCell(null);
     const cellElement = screen.getByTestId("cell-0");
     fireEvent.click(cellElement);
-    expect(mockUpdateBoard).toHaveBeenCalledWith(0);
+    expect(mockUpdateBoard).toHaveBeenCalledWith(
+      0,
+      expect.any(Function),
+      expect.any(Function),
+    );
     expect(mockClickSfx).toHaveBeenCalled();
   });
 
