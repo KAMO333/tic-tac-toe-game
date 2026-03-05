@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { MusicPlayerWrapper } from "./MusicPlayer.styled";
 import playList from "../../utils/MusicUtils/playlist";
 import { randomizeIndex } from "../../utils/MusicUtils";
@@ -7,11 +8,15 @@ import { SfxContext } from "../../contexts/SfxContext";
 import { Text } from "../../styles/General.styled";
 
 function MusicPlayer() {
+  const location = useLocation();
   const { hoverSfx, clickSfx } = useContext(SfxContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(randomizeIndex(playList));
   const [playPromise, setPlayPromise] = useState(null);
   const playerRef = useRef(null);
+
+  // Determine if we are on the game page
+  const isGamePage = location.pathname === "/game-on";
 
   useEffect(() => {
     if (isPlaying) {
@@ -28,15 +33,16 @@ function MusicPlayer() {
       playerRef.current?.pause();
       setIsPlaying(false);
     });
-
     setCurrentSong(randomizeIndex(playList));
     setIsPlaying(true);
   };
 
   const displaySong =
     playList[currentSong].split("/")[6] || playList[currentSong];
+
   return (
-    <MusicPlayerWrapper>
+    // Senior Fix: Use style to hide the UI while keeping the audio element alive
+    <MusicPlayerWrapper style={{ display: isGamePage ? "none" : "flex" }}>
       {isPlaying ? (
         <PauseIcon
           onClick={() => {
