@@ -1,4 +1,4 @@
-import { checkForWinner } from "../src/utils/GameUtils/Index";
+import { checkForWinner } from "../../utils/GameUtils/Index";
 
 describe("Game Logic: checkForWinner", () => {
   test("should identify a winning row", () => {
