@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 
 const useSound = (url, options) => {
-  const [sound, setSound] = useState(false);
-  useEffect(() => {
-    const audio = new Audio(url);
-    audio.load();
-    audio.volume = options.volume;
-    setSound(audio);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const [audio] = useState(new Audio(url));
 
-  return () => {
-    if (sound) {
-      sound.play();
+  useEffect(() => {
+    audio.volume = options.volume || 1;
+  }, [audio, options.volume]);
+
+  const play = () => {
+    // Reset the track to the start so it can play for every move
+    audio.currentTime = 0;
+
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.warn("Playback prevented:", error);
+      });
     }
-    setTimeout(() => {
-      sound.pause();
-      sound.currentTime = 0;
-    }, options.timeout);
   };
+
+  return play;
 };
 
 export default useSound;
