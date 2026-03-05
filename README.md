@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# 🕹️ React Tic-Tac-Toe (Lofi Edition)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Styled Components](https://img.shields.io/badge/Styled--Components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![Testing Library](https://img.shields.io/badge/Testing_Library-E33332?style=for-the-badge&logo=testing-library&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-## Available Scripts
+[![Tic-Tac-Toe CI](https://github.com/KAMO333/tic-tac-toe-game/actions/workflows/ci.yml/badge.svg)](https://github.com/KAMO333/tic-tac-toe-game/actions/workflows/ci.yml)
 
-In the project directory, you can run:
+A professional-grade, full-stack Tic-Tac-Toe game built with **React**, **Styled-Components**, and a focus on **Test-Driven Development (TDD)**. This project features immersive sound effects, Lofi background music, and a robust CI/CD pipeline.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Immersive Audio**: Integrated background music player and sound effects (SFX) using React Context.
+- **Dynamic Avatars**: Custom player avatars generated via `react-nice-avatar`.
+- **Responsive Design**: Built with Styled-Components for a seamless experience across devices.
+- **Production Quality**: Automated testing and CI/CD integration.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🏗️ Architecture
 
-### `npm run build`
+The project follows a modular architecture to separate concerns:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Components**: Atomic UI elements (Buttons, Cells, Modals).
+- **Contexts**: Global state management for Game Logic, Audio, and UI Themes.
+- **Hooks**: Custom logic for audio playback and modal state.
+- **Utils**: Pure, tested mathematical logic for win-conditions and music randomization.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧪 Testing & Quality Assurance
 
-### `npm run eject`
+This project maintains a high standard of code quality through comprehensive testing.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Test Categories
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Unit Tests**: Pure logic verification in `src/utils`.
+2. **Component Tests**: UI verification using React Testing Library.
+3. **Integration Tests**: State and Context flow verification for `GameContext`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running Tests
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+# Run tests in watch mode
+npm test
 
-## Learn More
+# Generate a full coverage report
+npm test -- --coverage --watchAll=false
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### CI/CD Pipeline
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Automated workflows are configured via **GitHub Actions**. Every push to `master` triggers a build and test cycle to ensure zero-regression deployments.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🛠️ Tech Stack
 
-### Analyzing the Bundle Size
+| Category   | Technology                     |
+| ---------- | ------------------------------ |
+| Frontend   | React 18, Styled-Components    |
+| State      | React Context API              |
+| Testing    | Jest, React Testing Library    |
+| Automation | GitHub Actions                 |
+| Icons/UI   | React Icons, React Nice Avatar |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🚦 Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Clone the repo: `git clone git@github.com:KAMO333/tic-tac-toe-game.git`
+2. Install dependencies: `npm install`
+3. Start the dev server: `npm start`
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📝 License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Distributed under the MIT License.
