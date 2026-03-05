@@ -24,10 +24,13 @@ export const GameContextProvider = (props) => {
     roundWinner: "",
     winningCombo: [],
   });
-
   const updateBoard = (index) => {
-    let updatedBoard = game.board;
+    const updatedBoard = [...game.board];
+
+    if (updatedBoard[index] !== null) return;
+
     updatedBoard[index] = game.turn;
+
     setGame({
       ...game,
       board: updatedBoard,
